@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="container">
+      <div class="jumbotron">
+        <h1 class="display-3">Film en projection</h1>
+        <p class="lead">liste des films actuellement projetés en salle</p>
+      </div>
+
+      <div class="row marketing">
+        <div class="col-lg-12">
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                <th scope="col">titre</th>
+                <th scope="col">durée</th>
+                <th scope="col">salle</th>
+                <th scope="col">étage</th>
+                </tr>
+            </thead>
+            <tbody>
+               {% for film in films %}
+                    <tr>
+                    <th scope="row"><a href="{{ path("show_film", {"id": film.film.id}) }}">{{ film.film.titre }}</a></th> 
+                    <td>{{ film.film.dureemin }}</td>
+                    <td>{{ film.numerosalle }}</td>
+                    <td>{{ film.etagesalle }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
+
+      
+
+      <footer class="footer">
+        <p>&copy; my cinémathèque 2019</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+{% endblock %}
