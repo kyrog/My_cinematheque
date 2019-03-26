@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FichePersoRepository")
@@ -18,16 +20,31 @@ class FichePerso
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 15,
+     *      minMessage = "Your first name must be at least {{ limit }} characters long",
+     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     * )
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *   @Assert\Length(
+     *      min = 2,
+     *      max = 15,
+     *      minMessage = "Your first name must be at least {{ limit }} characters long",
+     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     * )
      */
     private $prenom;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\Date
+     * @var string A "Y-m-d" formatted value
      */
     private $date_naissance;
 
@@ -38,16 +55,34 @@ class FichePerso
 
     /**
      * @ORM\Column(type="string", length=255)
+     *    @Assert\Length(
+     *      min = 5,
+     *      max = 25,
+     *      minMessage = "Your first name must be at least {{ limit }} characters long",
+     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     * )
      */
     private $adresse;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *   @Assert\Length(
+     *      min = 2,
+     *      max = 15,
+     *      minMessage = "Your first name must be at least {{ limit }} characters long",
+     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     * )
      */
     private $ville;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *   @Assert\Length(
+     *      min = 2,
+     *      max = 15,
+     *      minMessage = "Your first name must be at least {{ limit }} characters long",
+     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     * )
      */
     private $pays;
 
