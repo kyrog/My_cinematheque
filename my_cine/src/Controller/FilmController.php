@@ -3,15 +3,51 @@
 namespace App\Controller;
 
 use App\Entity\Film;
+use App\Entity\Genre;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
 
 class FilmController extends Controller
 {
+    /**
+     * @Route("/film/add", name="film_add")
+     */
+    public function addFilm(Request $request, ObjectManager $manager){
+
+        $film = new Film();
+        $form = $this->createFormBuilder($film)
+        ->add('titre')
+        ->add('resume')
+        ->add('sortie', BirthdayType::class)
+        ->add('dureemin', IntegerType::class)
+        ->add('genre', EntityType::class, [
+            'class' => Genre::class, 
+            'choice_label' => 'nom'])
+        ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($film);
+            $manager->flush();    
+            
+            return $this->redirectToRoute('home'); // a modifier pour renvoyer sur la liste des membres
+        }
+    
+
+       return $this->render('film/addFilm.html.twig', [
+        'form' => $form->createView()
+
+    ]);
+    }
     /**
      * @Route("/film/{id}", name="show_film")
      */
@@ -50,4 +86,6 @@ class FilmController extends Controller
             'films' => $films
         ]);
     }
+
+    
 }

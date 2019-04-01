@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+     <div class="container">
+             <div class="jumbotron">
+                <h1 class="display-3">Liste des Membres</h1>
+                </div>
+            <table class="table table-dark">
+            <thead>
+                <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">abonnement</th>
+
+                </tr>
+            </thead>
+            <tbody>
+            {% for membre in membres %}
+                    <tr>
+                        <th scope="row"><a href="{{ path("fiche_membre", {"id":membre.id}) }}">{{ membre.ficheperso.nom }}</a></th>
+                        <td>{{ membre.ficheperso.prenom }}</td>
+                        <td>{{ membre.abo.nom }}</td>
+                    </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+{% endblock %}

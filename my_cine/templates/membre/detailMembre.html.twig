@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+     <div class="container">
+             <div class="jumbotron">
+                <h1 class="display-3">Detail du Membre</h1>
+                </div>
+            <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prénom</th>
+                    <th scope="col">email</th>
+                    <th scope="col">date de naissance</th>
+                    <th scope="col">adresse</th>
+                    <th scope="col">ville</th>
+                    <th scope="col">pays</th>
+                    <th scope="col">abonnement</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        <td>{{ membre.ficheperso.nom }}</td>
+                        <td>{{ membre.ficheperso.prenom }}</td>
+                        <td>{{ membre.ficheperso.email }}</td>
+                        <td>{{ membre.ficheperso.datenaissance | date('d/m/y') }}</td>
+                        <td>{{ membre.ficheperso.adresse }}</td>
+                        <td>{{ membre.ficheperso.ville }}</td>
+                        <td>{{ membre.ficheperso.pays }}</td>
+                        <td>{{ membre.abo.nom }}</td>
+                    </tr>
+            </tbody>
+            </table>
+        </div>
+{% endblock %}

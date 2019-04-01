@@ -23,23 +23,24 @@
                         <a class="nav-link" href="{{ path("inscription") }}">inscription</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">abonnement</a>
+                        <a class="nav-link" href="#">abonnements</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         plus
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">membre</a>
-                            <a class="dropdown-item" href="#">salle</a>
+                            <a class="dropdown-item" href="{{ path("list_membre") }}">membres</a>
+                            <a class="dropdown-item" href="{{ path("salle") }}">salles</a>
                             <a class="dropdown-item" href="{{ path("film_list") }}">liste des films</a>
+                            <a class="dropdown-item" href="{{ path("film_add") }}">ajouter un film</a>
                         </div>
                     </li>
                     </ul>
                 </div>
                  <form class="form-inline" action="{{ path('film_list') }}" method="get"> 
-                    <input class="form-control mr-sm-2" name="title" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    <input class="form-control mr-sm-2" name="title" type="search" placeholder="rechercher un film..." aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
                 </form>
                 </nav>  
             </div>      
@@ -47,6 +48,13 @@
         {% block body %}
             
         {% endblock %}
+
+        {% block footer %}
+               <footer class="footer container">
+                    <p>&copy; my cinémathèque 2019</p>
+                </footer>
+        {% endblock %}
+
         {% block script %}
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

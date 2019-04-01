@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+        <div class="container">
+             <div class="jumbotron">
+                <h1 class="display-3">Liste des Salles</h1>
+                <p class="lead">détail des salles</p>
+            </div>
+            <table class="table table-dark">
+            <thead>
+                <tr>
+                <th scope="col">numéro de salle</th>
+                <th scope="col">étage</th>
+                <th scope="col">nombre de siège</th>
+                <th scope="col">film projeté</th>
+
+                </tr>
+            </thead>
+            <tbody>
+            {% for salle in salles %}
+                    <tr>
+                        <th scope="row">{{ salle.numerosalle }}</th>
+                        <td>{{ salle.etagesalle }}</td>
+                        <td>{{ salle.nbrsiege }}</td>
+                        <td><a href="{{ path("show_film", {"id":salle.film.id}) }}">{{ salle.film.titre }}</a></td>
+                    </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+{% endblock %}

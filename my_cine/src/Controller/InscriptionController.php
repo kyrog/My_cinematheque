@@ -8,8 +8,8 @@ use App\Entity\FichePerso;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class InscriptionController extends AbstractController
@@ -25,8 +25,9 @@ class InscriptionController extends AbstractController
         $form = $this->createFormBuilder($fiche)
         ->add('prenom')
         ->add('nom')
-        ->add('datenaissance', DateType::class, [
+        ->add('datenaissance', BirthdayType::class, [
             'widget' => 'choice',
+            'label' => 'date de naissance'
         ])
         ->add('email', EmailType::class)
         ->add('adresse')
@@ -40,26 +41,22 @@ class InscriptionController extends AbstractController
             $manager->persist($fiche);
             $manager->flush();
 
-            $id = $fiche->getId(); // recupere le dernier id de la fiche
+            $repository = $this->getDoctrine()->getRepository(Abonnement::class);
+            $abo = $repository->find(1);
 
-
-            // $repository = $this->getDoctrine()->getRepository(Abonnement::class);
-            // $lol = $repository->find(1);
-            // $lol = $lol->getId();
-
-            $relou = new Abonnement();
-            $relou->getId();
-            $manager->persist($relou);
             
             $membre = new Membre();
-            $membre->setAbo($relou)
+            $membre->setAbo($abo)
             ->setDateAbo(new \DateTime())
             ->setDateInscription(new \DateTime())
-            ->setFicheperso($id);
+            ->setFicheperso($fiche);
+
 
             $manager->persist($membre);
 
             $manager->flush();
+            return $this->redirectToRoute('home'); // a modifier pour renvoyer sur la liste des membres
+
         }
 
 

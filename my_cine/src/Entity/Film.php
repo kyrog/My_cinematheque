@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FilmRepository")
@@ -33,6 +35,10 @@ class Film
 
     /**
      * @ORM\Column(type="integer")
+     *   @Assert\Type(
+     *     type="integer",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
      */
     private $duree_min;
 
@@ -107,5 +113,7 @@ class Film
 
         return $this;
     }
+
+   
 
 }
